@@ -84,6 +84,7 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
     //calcul de l'Ã¢ge du joueur en jours pour situation par rapport Ã  la CDM
   	$jourj0 = ($sesUser["dateSemaine0"]+3600-574729200)/3600/24;
    	$jourjoueur[$k] = $jourj0 - $infJs[$k]["datenaiss"];
+	echo($jourjoueur[$k]);
     }
 ?>
   
@@ -127,22 +128,23 @@ function scanid()
     e=e+' ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>]<?=strtolower($infJs[$i]["idHattrickJoueur"])?>[/url])';
     e=e+'[/b]'; 
     
+	echo($jourjoueur[$i]);
     if ('<?=$sesUser["saison"]?>' % 2 == 0) {
   	// saison paire CDM
   		if ('<?=$jourjoueur[$i]?>' > 2067) {
-  			if ('<?=$jourjoueur[$i]?>' < 2129)
-  				d= '[color=blue]';
-  			else if ('<?=$jourjoueur[$i]?>' < 2178)
-  				d= '[color=red]';
-  			else if ('<?=$jourjoueur[$i]?>' < 2292)
-  				d= '[color=green]';
-  			else if ('<?=$jourjoueur[$i]?>' < 2239)
-  				d= '[color=green]';
-  			else if ('<?=$jourjoueur[$i]?>' < 2255)
-  				d= '[color=orange]';
-  			else if ('<?=$jourjoueur[$i]?>' < 2290)
-  				d= '[color=violet]';
-  		}
+			//if ('<?=$jourjoueur[$i]?>' < 2129)
+				//d= '[color=blue]';
+			//else if ('<?=$jourjoueur[$i]?>' < 2178)
+			//	d= '[color=red]';
+			//else if ('<?=$jourjoueur[$i]?>' < 2292) 2254 tour 3
+			//	d= '[color=green]';
+			//else if ('<?=$jourjoueur[$i]?>' < 2239) 2244 tour 4
+			//	d= '[color=green]';
+			//else if ('<?=$jourjoueur[$i]?>' < 2255) 2240 demi
+			//	d= '[color=orange]';
+			//else if ('<?=$jourjoueur[$i]?>' < 2290)
+			//	d= '[color=violet]'; finale 2238
+		}
   	}
   	else {
   		if ('<?=$jourjoueur[$i]?>' < 2127)
@@ -400,7 +402,7 @@ function scanid()
   
     if (document.forms.form1.typeresume[10].checked) {
 		//choix=TDL Le CF est chargé dans les paramètres supplémentaires
-		b='(D/C/B';
+		b='(D/C/B/CF';
 		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c='[b][i]';
 		c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
 		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
@@ -538,6 +540,7 @@ function scanid()
     }
     
     //On concatÃ¨ne
+	//f=$jourjoueur[$i];
     totalta=totalta+e+d+a+b+c;
     if ('<?=$origine?>'!='unique') totalta=totalta+'\n';
   <?php
